@@ -16,6 +16,18 @@ module.exports = function(RED) {
         return TYPES[Object.prototype.toString.call(v)];
     }
 
+    function encodePath (path) {
+        const url = new URL(path, 'https://localhost');
+        if (url.searchParams.size === 0) {
+            return url.pathname;
+        } else {
+            for (const [key, value] of url.searchParams) {
+                url.searchParams.set(key, encodeURIComponent(value));
+            }
+            return `${url.pathname}?${url.searchParams.toString()}`
+        }
+    }
+
     function OSEMApiCall(n) {
         RED.nodes.createNode(this,n);
         const DefaultMethod = n.method || 'GET';
@@ -27,7 +39,7 @@ module.exports = function(RED) {
             node.status({fill:'blue',shape:'yellow',text:'sending request...'});
 
             const method = msg.method || DefaultMethod;
-            const path = msg.path || DefaultPath;
+            const path = encodePath(msg.path || DefaultPath);
 
             const options = {
                 rejectUnauthorized: false,
