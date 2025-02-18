@@ -3,7 +3,7 @@
         "name": "sven.beisiegel@mitel.com"
     },
     "description": "node-red node for handling API calls to OpenScape Endpoint Management",
-    "name": "@DE-MUC-UCC-OSEM/node-red-contrib-osem",
+    "name": "node-red-contrib-osem",
     "publishConfig": {
         "registry": "https://npm.pkg.github.com/"
     },
@@ -24,11 +24,11 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/DE-MUC-UCC-OSEM/node-red-contrib-osem.git"
+        "url": "git+https://github.com/DE-MUC-UCC-OSEM/node-red-contrib-osem.git"
     },
     "engines": {
         "node": ">=20.0.0"
     },
     "homepage": "https://github.com/DE-MUC-UCC-OSEM/node-red-contrib-osem#readme",
-    "version": "1.1.0"
+    "version": "1.0.0"
 }
