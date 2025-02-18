@@ -21,7 +21,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/DE-MUC-UCC-OSEM/node-red-contrib-osem.git"
+        "url": "https://github.com/DE-MUC-UCC-OSEM/node-red-contrib-osem.git"
     },
     "engines": {
         "node": ">=20.0.0"
