@@ -3,7 +3,10 @@
         "name": "sven.beisiegel@mitel.com"
     },
     "description": "node-red node for handling API calls to OpenScape Endpoint Management",
-    "name": "node-red-contrib-osem",
+    "name": "@DE-MUC-UCC-OSEM/node-red-contrib-osem",
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    }
     "keywords": [
         "node-red",
         "OpenScape",
