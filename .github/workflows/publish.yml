@@ -41,7 +41,7 @@ jobs:
             fi
           fi
           npm --no-git-tag-version version "${{ github.event.inputs.version }}"
-          git add package.json package-lock.json
+          git add package.json
           git -c user.name="actions bot" -c user.email="actions-bot@users.noreply.github.com" commit -m "Set version to $(cat package.json | jq -r '.version') [skip ci]"
           git push origin ${{ github.ref_name }}
 
