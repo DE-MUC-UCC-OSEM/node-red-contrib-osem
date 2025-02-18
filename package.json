@@ -4,7 +4,15 @@
     },
     "description": "node-red node for handling API calls to OpenScape Endpoint Management",
     "name": "node-red-contrib-osem",
-    "keywords": [ "node-red", "OpenScape", "OSEM", "CP", "Devices", "Mitel", "Unify" ],
+    "keywords": [
+        "node-red",
+        "OpenScape",
+        "OSEM",
+        "CP",
+        "Devices",
+        "Mitel",
+        "Unify"
+    ],
     "node-red": {
         "version": ">=4.0.0",
         "nodes": {
@@ -19,5 +27,5 @@
         "node": ">=20.0.0"
     },
     "homepage": "https://github.com/DE-MUC-UCC-OSEM/node-red-contrib-osem#readme",
-    "version": "1.0.0"
+    "version": "1.0.1"
 }
