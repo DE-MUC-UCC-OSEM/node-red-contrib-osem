@@ -42,7 +42,7 @@ jobs:
           fi
           npm --no-git-tag-version version "${{ github.event.inputs.version }}"
           git add package.json
-          git -c user.name="actions bot" -c user.email="actions-bot@users.noreply.github.com" commit -m "Set version to $(cat package.json | jq -r '.version') [skip ci]"
+          git -c user.name="actions bot" -c user.email="actions-bot@users.noreply.github.com" commit -m "Set version to $(cat package.json | jq -r '.version')"
           git push origin ${{ github.ref_name }}
 
       - name: Create Package
@@ -54,7 +54,7 @@ jobs:
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          RELEASE_VERSION: ${{ github.event.inputs.release }}
+          RELEASE_VERSION: ${{ github.event.inputs.version }}
         run: |
           echo -e "OpenScape Endpoint Management Node-RED node version $RELEASE_VERSION\n" > rn
           gh release create "$RELEASE_VERSION" \
