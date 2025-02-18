@@ -18,14 +18,11 @@ module.exports = function(RED) {
 
     function encodePath (path) {
         const url = new URL(path, 'https://localhost');
-        if (url.searchParams.size === 0) {
-            return url.pathname;
-        } else {
-            for (const [key, value] of url.searchParams) {
-                url.searchParams.set(key, encodeURIComponent(value));
-            }
-            return `${url.pathname}?${url.searchParams.toString()}`
+        const params = []
+        for (const [key, value] of url.searchParams) {
+            params.push(`${key}=${encodeURIComponent(value)}`);
         }
+        return `${url.pathname}${params.length > 0 ? '?' + params.join('&') : ''}`;
     }
 
     function OSEMApiCall(n) {
@@ -36,11 +33,9 @@ module.exports = function(RED) {
         const node = this;
 
         this.on('input', function(msg, send, done) {
-            node.status({fill:'blue',shape:'yellow',text:'sending request...'});
-
             const method = msg.method || DefaultMethod;
             const path = encodePath(msg.path || DefaultPath);
-
+            node.status({fill:'yellow',shape:'dot',text:`${method} ${path}`});
             const options = {
                 rejectUnauthorized: false,
                 timeout: 5000,
@@ -65,12 +60,12 @@ module.exports = function(RED) {
             const req = https.request(options, (res) => {
                 const responseBody = [];
                 res.on('data', (chunk) => responseBody.push(chunk));
-                res.on('error', (err) => {
+                res.on('error', (error) => {
                     node.log(`error reading response: ${error.message}`);
-                    node.status({fill:'red',shape:'yellow',text:error.message});
+                    node.status({fill:'red',shape:'dot',text:error.message});
                 });
                 res.on('end', () => {
-                    node.status({fill:'green',shape:'green',text:'Request sent'});
+                    node.status({fill:'green',shape:'dot',text:`${method} ${path}`});
                     try {
                         msg.payload = JSON.parse(Buffer.concat(responseBody).toString());
                     } catch(err) {
@@ -84,12 +79,12 @@ module.exports = function(RED) {
                 
             req.on('error', (error) => {
                 node.log(`error sending request: ${error.message}`);
-                node.status({fill:'red',shape:'yellow',text:error.message});
+                node.status({fill:'red',shape:'dot',text:error.message});
                 done();
             });
             req.on('timeout', () => {
                 node.log(`timeout sending request: ${error.message}`);
-                node.status({fill:'red',shape:'yellow',text:'timeout sending request'});
+                node.status({fill:'red',shape:'dot',text:'timeout sending request'});
                 done();
             });
 
