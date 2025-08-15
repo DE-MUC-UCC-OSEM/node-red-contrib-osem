@@ -38,7 +38,7 @@ module.exports = function(RED) {
             node.status({fill:'yellow',shape:'dot',text:`${method} ${path}`});
             const options = {
                 rejectUnauthorized: false,
-                timeout: 5000,
+                timeout: 32000,
                 hostname: 'localhost',
                 port: 443,
                 path: path.match(/^\x2F/) ? `/api/v1${path}` : `/api/v1/${path}`,
@@ -83,7 +83,7 @@ module.exports = function(RED) {
                 done();
             });
             req.on('timeout', () => {
-                node.log(`timeout sending request: ${error.message}`);
+                node.log('timeout sending request');
                 node.status({fill:'red',shape:'dot',text:'timeout sending request'});
                 done();
             });
