@@ -9,10 +9,7 @@ function toStringSafe(value) {
 module.exports = function (RED) {
     function TextDisplayNode(config) {
         RED.nodes.createNode(this, config);
-        var node = this;
-
-        // Store the node ID so we can reference its context
-        node.nodeId = node.id;
+        const node = this;
 
         node.on('input', function (msg) {
             payload = msg.payload || '';
@@ -22,6 +19,10 @@ module.exports = function (RED) {
 
         RED.httpAdmin.get("/osem-out/get-data", RED.auth.needsPermission("osem-out.read"), function(req, res) {
             res.end(toStringSafe(payload));
+        });
+    
+        node.on('close', function() {
+            node.status({});
         });
     }
     RED.nodes.registerType('osem-out', TextDisplayNode);
