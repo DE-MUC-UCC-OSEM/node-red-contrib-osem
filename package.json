@@ -32,5 +32,5 @@
         "node": ">=20.0.0"
     },
     "homepage": "https://github.com/DE-MUC-UCC-OSEM/node-red-contrib-osem#readme",
-    "version": "1.1.1"
+    "version": "1.2.0"
 }
