@@ -5,7 +5,7 @@ module.exports = function(RED) {
         RED.nodes.createNode(this,n);
         const node = this;
 
-        const EventType = n.event || 'inventory';
+        const EventType = n.eventtype || 'inventory';
 
         // Configure Agent for persistent connections and no timeouts
         const agent = new Agent({
