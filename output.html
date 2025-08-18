@@ -10,11 +10,8 @@
             return 'OSEM Output Node';
         },
         oneditprepare: function() {
-            // Get the stored payload from flow context
-            var nodeId = this.id;
-            // This is a workaround: Node-RED exposes flow context via RED.nodes.getNode
-            var node = RED.nodes.node(nodeId);
-            $.get("osem-out/get-data", function(data) {
+            const node = this;
+            $.get(`osem-out/${node.id}`, function(data) {
                 $('#node-textarea').val(data);
             });
         }
