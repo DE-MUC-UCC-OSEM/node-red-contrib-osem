@@ -52,7 +52,7 @@ module.exports = function(RED) {
             if (varType(msg.payload) === VarType.object || varType(msg.payload) === VarType.array) {
                 msg.payload = JSON.stringify(msg.payload);
             }
-            if (varType(msg.payload) === VarType.string) {
+            if (varType(msg.payload) === VarType.string && method !== 'GET') {
                 options.headers['Content-Type'] = 'application/json'
                 options.headers['Content-Length'] = msg.payload.length
             }
@@ -88,7 +88,7 @@ module.exports = function(RED) {
                 done();
             });
 
-            varType(msg.payload) === VarType.string && req.write(msg.payload);
+            method !== 'GET' && varType(msg.payload) === VarType.string && req.write(msg.payload);
             req.end();
         });
 
