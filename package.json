@@ -19,7 +19,8 @@
     "node-red": {
         "version": ">=4.0.0",
         "nodes": {
-            "osem-api": "osem.js"
+            "osem-api": "osem.js",
+            "osem-out": "output.js"
         }
     },
     "repository": {
