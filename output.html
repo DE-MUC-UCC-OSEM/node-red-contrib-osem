@@ -1,0 +1,34 @@
+<script type="text/javascript">
+    RED.nodes.registerType('osem-out', {
+        category: 'network',
+        color:"rgb(17, 162, 219)",
+        defaults: {},
+        inputs: 1,
+        outputs: 1,
+        icon: 'file.png',
+        label: function() {
+            return 'OSEM Output Node';
+        },
+        oneditprepare: function() {
+            // Get the stored payload from flow context
+            var nodeId = this.id;
+            // This is a workaround: Node-RED exposes flow context via RED.nodes.getNode
+            var node = RED.nodes.node(nodeId);
+            $.get("osem-out/get-data", function(data) {
+                $('#node-textarea').val(data);
+            });
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="osem-out">
+    <div class="form-row" style="height:100%;">
+        <label for="node-textarea"><b>Output:</b></label>
+        <textarea id="node-textarea" style="width:100%; font-family: monospace; height:100%; resize: none;"></textarea>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="osem-out">
+    <p>Provides a node for retrieving data from an API response. This node will provide the content of msg.payload, so it can be copied from the Node-RED admin ui.</p>
+    <p>The message object will be send unmodified in the flow</p>
+</script>
