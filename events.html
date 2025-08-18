@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    RED.nodes.registerType('osem-evt',{
+        category: 'network',
+        color:"rgb(17, 162, 219)",
+        defaults: {
+            name: {value:""},
+            event: {value:"inventory"}
+        },
+        inputs:0,
+        outputs:1,
+        icon: "bridge.png",
+        label: function() {
+            return this.name||"OSEM Events";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="osem-evt">
+    <div class="form-row">
+        <label for="node-input-event" style="width:40%;"><i class="fa fa-tasks"></i> Method:</label>
+        <select type="text" id="node-input-event" style="width:55%;">
+            <option value="inventory">Inventory</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name" style="width:40%;"><i class="fa fa-tag"></i> Name:</label>
+        <input type="text" id="node-input-name" placeholder="Name..." style="width:55%;">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="osem-evt">
+    <p>Provides a node for receiving Events from OSEM. E.g. for new devices, mobile logins or logoffs.</p>
+</script>
